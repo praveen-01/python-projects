@@ -3,8 +3,12 @@ from math import *
 expression=""
 def input_number(number, equation):
    global expression
-   expression = expression + str(number)
+   if number=="<-":
+      expression=expression[:len(expression)-1]
+   else:
+      expression = expression + str(number)
    equation.set(expression)
+
 def clear_input_field(equation):
    global expression
    expression = ""
@@ -18,6 +22,7 @@ def evaluate(equation):
     except:
         equation.set("check the entered equation")
         expression = ""
+
 window=Tk()
 window.title("Calci")
 window.geometry("300x300")
@@ -44,11 +49,11 @@ log101=Button(window, text="log10",fg="white",bg="black",bd=5,command=lambda: in
 plus = Button(window, text='+', fg='white', bg='black', bd=5, command=lambda: input_number('+', equation), height=2, width=5)
 minus = Button(window, text='-', fg='white', bg='black', bd=5, command=lambda: input_number('-', equation), height=2, width=5)
 multiply = Button(window, text='*', fg='white', bg='black', bd=5, command=lambda:  input_number('*', equation), height=2, width=5)
-divide = Button(window, text='/', fg='white', bg='black', bd=5, command=lambda: input_number('/', equation), height=2, width=5)   
-equal = Button(window, text='=', fg='white', bg='black', bd=5, command=lambda: evaluate(equation), height=2, width=5)   
+divide = Button(window, text='/', fg='white', bg='black', bd=5, command=lambda: input_number('/', equation), height=2, width=5)
+equal = Button(window, text='=', fg='white', bg='black', bd=5, command=lambda: evaluate(equation), height=2, width=5)
 clear = Button(window, text='C', fg='white', bg='black', bd=5, command=lambda: clear_input_field(equation), height=2, width=5)
 decimal=Button(window, text=".", fg="white", bg="black", bd=5, command=lambda: input_number(".",equation), height=2, width=5)
-
+bac=Button(window, text="<-", fg="white", bg="black", bd=5, command=lambda: input_number("<-",equation), height=2, width=5)
 _0.place(x=0,y=200)
 _1.place(x=0,y=50)
 _2.place(x=60,y=50)
@@ -71,3 +76,4 @@ bo.place(x=60,y=250)
 bc.place(x=120,y=250)
 sqrt1.place(x=240,y=50)
 log101.place(x=240,y=100)
+bac.place(x=240,y=150)
